@@ -1,0 +1,43 @@
+// Strategy Pattern – Hanterar olika prissättningar dynamiskt
+
+public interface IPriceStrategy
+{
+    decimal CalculatePrice(int hours);
+}
+
+public class DayPricingStrategy : IPriceStrategy
+{
+    public decimal CalculatePrice(int hours)
+        => hours * 20m;
+}
+
+public class NightPricingStrategy : IPriceStrategy
+{
+    public decimal CalculatePrice(int hours)
+        => hours * 10m;
+}
+
+public class PriceCalculator
+{
+    private readonly IPriceStrategy _strategy;
+
+    public PriceCalculator(IPriceStrategy strategy)
+    {
+        _strategy = strategy;
+    }
+
+    public decimal GetTotalPrice(int hours)
+        => _strategy.CalculatePrice(hours);
+}
+
+// Användning
+DateTime now = DateTime.Now;
+
+IPriceStrategy strategy = (now.Hour >= 8 && now.Hour < 18)
+    ? new DayPricingStrategy()
+    : new NightPricingStrategy();
+
+PriceCalculator calculator = new PriceCalculator(strategy);
+decimal total = calculator.GetTotalPrice(3);
+
+Console.WriteLine($"Totalpris: {total} kr");
