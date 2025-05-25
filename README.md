@@ -10,11 +10,9 @@ Aktör: Parkeringsanvändare
 Preconditions: Användaren har valt områdeskod och fyllt i starttid
 Flöde:
 
-Systemet identifierar tidpunkt (t.ex. 22:00)
-
-Rätt strategi (NightTimeRateStrategy) används för att beräkna pris
-
-Pris presenteras för användaren innan köp
+1. Systemet identifierar tidpunkt (t.ex. 22:00)
+2. Rätt strategi (NightTimeRateStrategy) används för att beräkna pris
+3. Pris presenteras för användaren innan köp
 
 Postcondition: Användaren ser korrekt avgift.
 
